@@ -1,0 +1,87 @@
+.landing-bg {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1740&q=80') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+.landing-overlay {
+  position: absolute;
+  inset: 0;
+ background: rgba(20, 24, 31, 0.65); /* reduce opacity */
+  backdrop-filter: none; /* remove blur */
+  z-index: 1;
+}
+.landing-nav {
+  z-index: 10;
+}
+.landing-btn {
+  font-weight: 500;
+  min-width: 100px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.landing-btn:focus, .landing-btn:hover {
+  box-shadow: 0 2px 12px 0 rgba(255,255,255,0.15);
+  transform: translateY(-2px) scale(1.04);
+}
+.landing-btn-cta {
+  font-size: 1.25rem;
+  padding: 0.75rem 2.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 24px 0 rgba(0,123,255,0.15);
+}
+.landing-btn-cta:focus, .landing-btn-cta:hover {
+  background: #0056b3;
+  color: #fff;
+}
+.landing-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  max-width: 380px;
+  width: 92vw;
+  background: rgba(0,0,0,0.5);
+  border-radius: 1.5rem;
+  padding: 2rem 1.2rem 2rem 1.2rem;
+}
+@media (max-width: 600px) {
+  .landing-center-content {
+    padding: 1.1rem 0.3rem;
+    max-width: 98vw;
+  }
+  .chat-icon {
+    font-size: 2.2rem;
+  }
+  .landing-btn-cta {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+  .landing-nav {
+    padding: 1rem 0.5rem !important;
+  }
+}
+
+.brand-highlight {
+  color: #ffc107;
+  letter-spacing: 1px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.chat-icon {
+  font-size: 8rem;
+  color: #ffc107;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  animation: float 2s ease-in-out infinite;
+}
