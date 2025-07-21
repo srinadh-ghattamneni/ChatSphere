@@ -36,10 +36,12 @@ function ChatRoomPage() {
   useEffect(() => {
     if (!roomId || !user) return;
 
+     //  Fetch room info 
     api.get(`/chat/room/${roomId}`)
       .then(res => setRoomInfo(res.data))
-      .catch(() => {});
+      .catch(() => { });
 
+      // Fetch all previous messages
     api.get(`/chat/room/${roomId}/messages`)
       .then(res => {
         setEvents(res.data.map(m => ({
@@ -49,15 +51,19 @@ function ChatRoomPage() {
           createdAt: m.createdAt
         })));
       })
-      .catch(() => {});
-
+      .catch(() => { });
+       // Initialize the socket connection
     socketRef.current = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000', {
       transports: ['websocket'],
       withCredentials: true,
     });
 
+    //  Join the room
     socketRef.current.emit('joinRoom', { code: roomId, username: user });
 
+
+
+    //  Listen to new messages from other users
     socketRef.current.on('event', (evt) => {
       if (!evt.username || !evt.content) return;
       setEvents(prev => [...prev, {
@@ -68,10 +74,14 @@ function ChatRoomPage() {
       }]);
     });
 
+
+     //  Listen to user count update
     socketRef.current.on('userCount', (data) => {
       setUsersCount(data.count);
     });
 
+
+    // Cleanup on unmount (when leaving page)
     return () => {
       if (socketRef.current) {
         socketRef.current.emit('leaveRoom', { code: roomId, username: user });
@@ -118,7 +128,7 @@ function ChatRoomPage() {
           <ListGroup variant="flush" className="w-100">
             {events.map((evt, idx) => (
               <ListGroup.Item key={idx} className={`border-0 d-flex ${evt.self ? 'justify-content-end' : 'justify-content-start'} bg-transparent`}>
-               <div className={`chat-bubble p-2 px-3 rounded-4 shadow-sm mb-1 ${evt.self ? 'bg-primary text-white' : 'bg-light text-dark'}`}>
+                <div className={`chat-bubble p-2 px-3 rounded-4 shadow-sm mb-1 ${evt.self ? 'bg-primary text-white' : 'bg-light text-dark'}`}>
                   <span className="fw-bold small">{evt.self ? 'You' : evt.user}</span><br />
                   <span>{evt.content}</span>
                   <div className="text-end text-muted small mt-1">{dayjs(evt.createdAt).format('HH:mm, MMM D')}</div>

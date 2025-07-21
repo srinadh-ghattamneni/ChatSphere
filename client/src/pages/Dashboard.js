@@ -86,7 +86,7 @@ function Dashboard({ activeTab, setActiveTab, onLogout }) {
     <main className="dashboard-bg py-4 min-vh-100">
       <Container>
         <Row className="justify-content-center">
-         <Col xs={12} md={10} lg={8} xl={6}>
+          <Col xs={12} md={10} lg={8} xl={6}>
 
             {activeTab === 'create' && (
               <Card className="p-4 mb-4 dashboard-card">
@@ -126,59 +126,59 @@ function Dashboard({ activeTab, setActiveTab, onLogout }) {
               </Card>
             )}
 
-          {activeTab === 'myRooms' && (
-  <Card className="p-4 mb-4 dashboard-card">
-    <h4 className="mb-3"><FaUsers className="me-2 text-warning" />My Rooms</h4>
-    <ListGroup variant="flush">
-      {myRooms.map(room => (
-        <ListGroup.Item
-          key={room.code || Math.random()}
-          className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-        >
-          {/* Room Info */}
-          <div>
-            <div className="fs-5 fw-bold text-primary d-flex align-items-center flex-wrap gap-1">
-              <FaComments className="me-2 text-info" />
-              <span className="dashboard-room-name-text d-block">{room.name}</span>
-            </div>
-            <div className="mt-1 mb-1">
-              <Badge bg="secondary" className="dashboard-room-code-badge">{room.code || 'NO_CODE'}</Badge>
-            </div>
-            <div className="text-muted">Max: {room.maxCapacity}</div>
-          </div>
+            {activeTab === 'myRooms' && (
+              <Card className="p-4 mb-4 dashboard-card">
+                <h4 className="mb-3"><FaUsers className="me-2 text-warning" />My Rooms</h4>
+                <ListGroup variant="flush">
+                  {myRooms.map(room => (
+                    <ListGroup.Item
+                      key={room.code || Math.random()}
+                      className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
+                    >
+                      {/* Room Info */}
+                      <div>
+                        <div className="fs-5 fw-bold text-primary d-flex align-items-center flex-wrap gap-1">
+                          <FaComments className="me-2 text-info" />
+                          <span className="dashboard-room-name-text d-block">{room.name}</span>
+                        </div>
+                        <div className="mt-1 mb-1">
+                          <Badge bg="secondary" className="dashboard-room-code-badge">{room.code || 'NO_CODE'}</Badge>
+                        </div>
+                        <div className="text-muted">Max: {room.maxCapacity}</div>
+                      </div>
 
-          {/* Buttons */}
-          <div className="d-flex gap-2 mt-2 mt-sm-0 w-100 justify-content-end">
-            <Button
-              size="md"
-              variant="outline-primary"
-              className="flex-grow-0"
-              onClick={() => navigate(`/chat/${room.code}`)}
-            >
-              <FaSignInAlt className="me-1" />Join
-            </Button>
-            <Button
-              size="md"
-              variant="outline-danger"
-              className="flex-grow-0"
-              disabled={deletingRoomCode === room.code}
-              onClick={() => handleDelete(room.code)}
-            >
-              {deletingRoomCode === room.code ? 'Deleting...' : (<><FaTrash className="me-1" />Delete</>)}
-            </Button>
-          </div>
-        </ListGroup.Item>
-      ))}
-      {myRooms.length === 0 && (
-        <ListGroup.Item className="text-center text-muted py-4">
-          No rooms created yet. Create or join a room to get started!
-        </ListGroup.Item>
-      )}
-    </ListGroup>
-  </Card>
-)}
+                      {/* Buttons */}
+                      <div className="d-flex gap-2 mt-2 mt-sm-0 w-100 justify-content-end">
+                        <Button
+                          size="md"
+                          variant="outline-primary"
+                          className="flex-grow-0"
+                          onClick={() => navigate(`/chat/${room.code}`)}
+                        >
+                          <FaSignInAlt className="me-1" />Join
+                        </Button>
+                        <Button
+                          size="md"
+                          variant="outline-danger"
+                          className="flex-grow-0"
+                          disabled={deletingRoomCode === room.code}
+                          onClick={() => handleDelete(room.code)}
+                        >
+                          {deletingRoomCode === room.code ? 'Deleting...' : (<><FaTrash className="me-1" />Delete</>)}
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  ))}
+                  {myRooms.length === 0 && (
+                    <ListGroup.Item className="text-center text-muted py-4">
+                      No rooms created yet. Create or join a room to get started!
+                    </ListGroup.Item>
+                  )}
+                </ListGroup>
+              </Card>
+            )}
 
-            
+
           </Col>
         </Row>
       </Container>
